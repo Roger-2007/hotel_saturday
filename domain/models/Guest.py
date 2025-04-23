@@ -3,10 +3,18 @@ from domain.models.User import User
 
 class Guest(User):
 
-    def __init__(self,id, name , last_name,phone, email, password, status, origin, occupation ):
-        super().__init__(id, name , last_name,phone, email, password, status)
+    def __init__(self,id_guest, name , last_name,phone, email, password, status, origin, occupation ):
+        super().__init__(id_guest, name , last_name,phone, email, password, status)
         self._origin = origin
         self._occupation = occupation
+
+    @property
+    def id_guest(self):
+        return self._id
+
+    @id_guest.setter
+    def id_guest(self,id):
+        self._id=id
 
     @property
     def occupation(self):
