@@ -31,12 +31,45 @@ class Menu_App:
 
             option = int(input("1. Login 2. registro 3. salir"))
 
-            if option == 1:
-                print("Login")
-                self.bedroom_input.create_bedroom(self.db)
-            elif option == 2:
-                print("Registro")
-                self.guest_input.register(self.guest,self.db)
+            match option:
+                case 1: #LOGIN
+                    select = 0
+                    select = int(input("Quien se quiere loguear\n1.Huesped\n2.Empleado"))
+                    match select:
+                        case 1: #LOGIN - GUEST
+                            datos = self.guest_input.login(self.db)
+                            if not datos:
+                                print("Huesped no encontrado")
+                            else:
+                                id_guest = datos[0][0]
+                                option_login=0
+                                while option_login != 4:
+                                    option_login = int(input("\n1. Hacer una reservacion\n2.Editar perfil\3.Borrar perfil\n4.Cerrar sesion"))
+
+                                    match option_login:
+                                        #case 1:
+
+
+                                        case 2: #UPDATE - GUEST
+                                            self.guest_input.update(id_guest,self.db)
+                                            option_login=4
+                                        case 3: #DISABLE GUEST
+                                            self.guest_input.disable(id_guest,self.db)
+                                            option_login=4
+                                        case _: #INCORRECT OPTION
+                                            print("Opcion invalida")
+
+
+                case 2 : #REGISTER
+                    print("Registro")
+                    self.guest_input.register(self.guest,self.db)
+
+                case 3: #FINISH
+                    print("Finalizaste con exito")
+                    init=0
+
+                case _: #INCORRECT OPTION
+                    print("Opcion invalida")
 
 
 

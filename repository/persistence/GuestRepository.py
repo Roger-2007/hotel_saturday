@@ -17,7 +17,7 @@ class GuestRepository:
         db.execute_query(query , values)
 
     def login_guest_repository(self,guest,db):
-        query = "SELECT * FROM guest where email=%s and password=%s"
+        query = "SELECT * FROM guest where email=%s and password=%s and status=1"
         values = (guest.email,guest.password)
         result = db.execute_query(query,values)
         return result
