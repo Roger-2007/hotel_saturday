@@ -9,6 +9,7 @@ from repository.conexion.Conexion import Conexion
 from application.BedroomInput import BedroomInput
 from domain.models.Bedroom import Bedroom
 from application.MandatoryServiceInput import MandatoryServiceInput
+from application.OptionalServiceInput import OptionalServiceInput
 
 
 
@@ -24,6 +25,7 @@ class Menu_App:
         self.guest_input = GuestInput()
         self.bedroom_input = BedroomInput()
         self.mandatory_service_input = MandatoryServiceInput()
+        self.optional_service_input = OptionalServiceInput()
 
 
     def init_app(self):
@@ -49,9 +51,8 @@ class Menu_App:
                                     option_login = int(input("\n1. Hacer una reservacion\n2. Editar perfil\n3. Borrar perfil\n4. Cerrar sesion"))
 
                                     match option_login:
-                                        case 1:
-                                            mandatoryServices = self.mandatory_service_input.all_mandatory_service(self.db)
-                                            print(mandatoryServices)
+                                        #case 1:
+
 
 
                                         case 2: #UPDATE - GUEST
