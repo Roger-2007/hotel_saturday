@@ -9,4 +9,3 @@ class Reservacion_ServicioOpcionalInput:
         self.reservacion_servicio_opcional.id_booking=id_booking
         self.reservacion_servicio_opcional.id_optional_service=id_optional_service
         self.reservacion_servicio_opcional_repository.create_reservacion_servicioOpcional_repository(self.reservacion_servicio_opcional,db)
-    
