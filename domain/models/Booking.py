@@ -1,11 +1,8 @@
-from domain.models.Bedroom import Bedroom
-from domain.models.Guest import Guest
-
 class Booking:
-    def __init__(self,id_booking,guest: Guest,bedroom : Bedroom,start_date,end_date,total):
+    def __init__(self,id_booking,id_guest,id_bedroom,start_date,end_date,total):
         self._id_booking = id_booking
-        self._guest = guest
-        self._bedroom = bedroom
+        self._id_guest = id_guest
+        self._id_bedroom = id_bedroom
         self._start_date=start_date
         self._end_date = end_date
         self._total = total
@@ -19,20 +16,20 @@ class Booking:
         self._id_booking = id_booking
 
     @property
-    def guest(self):
-        return self._guest
+    def id_guest(self):
+        return self._id_guest
 
-    @guest.setter
-    def guest(self, guest: Guest):
-        self._guest = guest
+    @id_guest.setter
+    def id_guest(self, id_guest):
+        self._id_guest = id_guest
 
     @property
-    def bedroom(self):
-        return self._bedroom
+    def id_bedroom(self):
+        return self._id_bedroom
 
-    @bedroom.setter
-    def bedroom(self, bedroom: Bedroom):
-        self._bedroom = bedroom
+    @id_bedroom.setter
+    def id_bedroom(self, id_bedroom):
+        self._id_bedroom = id_bedroom
 
     @property
     def start_date(self):
