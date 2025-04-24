@@ -13,8 +13,8 @@ class GuestInput:
 
 
     def register(self, guest , db):
-        id = int(input("Ingrese su documento de identidad"))
-        self.guest.id = id
+        id_guest = int(input("Ingrese su documento de identidad"))
+        self.guest.id_guest = id_guest
         name = input("Ingrese su nombre")
         self.guest.name = name
         last_name = input("Ingrese su apellido")

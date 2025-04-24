@@ -8,8 +8,8 @@ class BedroomInput:
         self.bedroomRepository = BedroomRepository()
 
     def create_bedroom(self, db):
-        number = int(input("Ingrese el numero de la habitacion"))
-        self.bedroom.number = number
+        id_bedroom = int(input("Ingrese el numero de la habitacion"))
+        self.bedroom.id_bedroom = id_bedroom
         type = input("Ingrese el tipo de habitacion")
         self.bedroom.type = type
         price = int(input("Ingrese el precio de la habitacion"))
