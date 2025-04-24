@@ -37,7 +37,6 @@ class Conexion:
         try:
             cursor.execute(query, params)
             self.connection.commit()
-            print("Registro se guardo exitosamente")
             if query.lower().startswith('select'):
                 result =cursor.fetchall()
                 return result
