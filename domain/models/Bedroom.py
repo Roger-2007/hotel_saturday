@@ -1,6 +1,6 @@
 class Bedroom:
-    def __init__(self,number,type,price,capacity,description,status):
-        self._number=number
+    def __init__(self,id_bedroom,type,price,capacity,description,status):
+        self._id_bedroom=id_bedroom
         self._type=type
         self._price=price
         self._capacity=capacity
@@ -8,12 +8,12 @@ class Bedroom:
         self._status=status
 
     @property
-    def number(self):
-        return self._number
+    def id_bedroom(self):
+        return self._id_bedroom
 
-    @number.setter
-    def number(self,number):
-        self._number=number
+    @id_bedroom.setter
+    def id_bedroom(self,id_bedroom):
+        self._id_bedroom=id_bedroom
 
     @property
     def type(self):
