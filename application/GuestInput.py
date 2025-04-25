@@ -25,8 +25,6 @@ class GuestInput:
         self.guest.email = email
         password = input("Ingrese su contraseña")
         self.guest.password = password
-        status = input("Seleccione el estado")
-        self.guest.status = status
         origin = input("Ingrese su ciudad de origen")
         self.guest.origin = origin
         occupation = input("Ingrese su ocupacion")

@@ -8,8 +8,7 @@ class MandatoryServiceInput:
         self.mandatory_service_repository = MandatoryServiceRepository()
 
     def create_mandatory_service(self,db):
-        id = int(input("Ingrese el id del servicio obligatorio"))
-        self.mandatory_service.id=id
+
         name = input("Ingrese el nombre del servicio obligatorio")
         self.mandatory_service.name=name
         description = input("Ingrese al descripcion del servicio obligatorio")
@@ -33,3 +32,6 @@ class MandatoryServiceInput:
     def delete_mandatory_service(self,id,db):
         self.mandatory_service.id=id
         self.mandatory_service_repository.delete_mandatory_service_repository(self.mandatory_service,db)
+
+    def get_total_price_mandatory_service(self,db):
+        return self.mandatory_service_repository.get_total_price_mandatory_service_repository(db)
