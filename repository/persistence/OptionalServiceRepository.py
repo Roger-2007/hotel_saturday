@@ -8,6 +8,7 @@ class OptionalServiceRepository:
         query = "INSERT INTO optionalservice (name,description,price) VALUES (%s,%s,%s)"
         values = optional_service.name , optional_service.description , optional_service.price
         db.execute_query(query,values)
+        print("Servicio creado con exito")
 
     def all_optional_service_repository(self,db):
         query = "SELECT * FROM optionalservice"
@@ -23,3 +24,4 @@ class OptionalServiceRepository:
         query = "DELETE from optionalservice where id=%s"
         values = (optional_service.id,)
         db.execute_query(query,values)
+

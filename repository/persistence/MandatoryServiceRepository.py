@@ -8,6 +8,7 @@ class MandatoryServiceRepository:
         query = "INSERT INTO mandatoryservice (name,description,price) VALUES (%s,%s,%s)"
         values = mandatory_service.name , mandatory_service.description , mandatory_service.price
         db.execute_query(query,values)
+        print("Servicio creado con exito")
 
     def all_mandatory_service_repository(self,db):
         query = "SELECT * FROM mandatoryservice"
@@ -23,3 +24,8 @@ class MandatoryServiceRepository:
         query = "DELETE from mandatoryservice where id=%s"
         values = (mandatory_service.id,)
         db.execute_query(query,values)
+
+    def get_total_price_mandatory_service_repository(self,db):
+        query = "SELECT sum(price) from mandatoryservice"
+        result = db.execute_query(query)
+        return result

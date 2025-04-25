@@ -8,8 +8,7 @@ class OptionalServiceInput:
         self.optional_service_repository = OptionalServiceRepository()
 
     def create_optional_service(self,db):
-        id = int(input("Ingrese el id del servicio opcional"))
-        self.optional_service.id=id
+
         name = input("Ingrese el nombre del servicio opcional")
         self.optional_service.name=name
         description = input("Ingrese al descripcion del servicio opcional")
