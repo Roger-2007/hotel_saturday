@@ -64,7 +64,7 @@ class Menu_App:
 
     def init_app(self):
 
-        init = (int(input("Presione 1 para inicializar")))
+        init = (int(input("Presione 1 para inicializar\n")))
 
         while init != 0:
 
@@ -96,19 +96,14 @@ class Menu_App:
                                                 self.db)
                                             optional_service = self.optional_service_input.all_optional_service(self.db)
                                             all_bedrooms = self.bedroom_input.all_bedrooms(self.db)
-                                            #for i, bedroom in enumerate(all_bedrooms):
-                                            #    print(
-                                            #        f"{i + 1}. Tipo de habitacion: {bedroom[1]} - precio: {bedroom[2]} - capacidad para {bedroom[3]} personas")
-                                            #option_bedroom = int(input("Seleccione alguna habitacion"))
+                                            if not all_bedrooms:
+                                                break
                                             option_bedroom = self.select_bedroom(all_bedrooms)
-                                            print(option_bedroom)
                                             id_bedroom = all_bedrooms[0]
                                             bedroom_price = all_bedrooms[2]
-                                            mandatory_service_total = self.mandatory_service_input.get_total_price_mandatory_service(
-                                                self.db)
+                                            mandatory_service_total = self.mandatory_service_input.get_total_price_mandatory_service(self.db)
                                             self.booking_input.create_booking(id_guest, id_bedroom, self.db)
-                                            id_booking = self.booking_input.get_id_booking(id_guest, id_bedroom,
-                                                                                           self.db)
+                                            id_booking = self.booking_input.get_id_booking(id_guest, id_bedroom,self.db)
 
                                             option_optional = 1
                                             while option_optional != 0:
