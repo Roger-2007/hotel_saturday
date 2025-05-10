@@ -41,8 +41,8 @@ class Conexion:
                 result =cursor.fetchall()
                 return result
         except mysql.connector.Error as err:
-            print("Error al ejecutar la consulta", err)
-            return None
+            #print("Error al ejecutar la consulta", err)
+            raise
         finally:
             cursor.close()
 

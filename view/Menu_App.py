@@ -1,5 +1,5 @@
 from domain.models.Guest import Guest
-from application.GuestService import GuestService
+from domain.service.GuestService import GuestService
 from application.GuestInput import GuestInput
 from repository.conexion.Conexion import Conexion
 from application.BedroomInput import BedroomInput
@@ -27,7 +27,43 @@ class Menu_App:
         self.booking_optional_service_input = Reservacion_ServicioOpcionalInput()
         self.employee_input = EmployeeInput()
 
+    def select_bedroom(self, all_bedrooms):
+            print("")
+            for i, bedroom in enumerate(all_bedrooms):
+                print(
+                    f"{i + 1}. Tipo de habitación: {bedroom[1]} - precio: {bedroom[2]} - capacidad para {bedroom[3]} personas")
+            while True:
+                try:
+                    option = int(input("Seleccione alguna habitación: "))
+                    if 1 <= option <= len(all_bedrooms):
+                        return all_bedrooms[option - 1]
+                    else:
+                        print("\nOpción invalida\n")
+                except ValueError:
+                    print("\nSolo se permiten numeros\n")
+
+    def select_optional_services(self, optional_services, id_booking):
+        while True:
+            print("\nServicios opcionales disponibles:")
+            for i, opt in enumerate(optional_services):
+                print(f"{i + 1}. {opt[1]}, {opt[2]} - valor: {opt[3]}")
+            try:
+                option = int(input("Selecciona un servicio opcional o pulsa '0' para omitir: "))
+                if option == 0:
+                    break
+                elif 1 <= option <= len(optional_services):
+                    id_optional_service = optional_services[option - 1][0]
+                    self.booking_optional_service_input.create_reservacion_servicio_opcional(
+                        id_booking, id_optional_service, self.db)
+                else:
+                    print("Opción inválida.")
+            except ValueError:
+                print("Entrada inválida.")
+
+
+
     def init_app(self):
+
         init = (int(input("Presione 1 para inicializar")))
 
         while init != 0:
@@ -37,18 +73,17 @@ class Menu_App:
             match option:
                 case 1:  # LOGIN
                     select = 0
-                    select = int(input("Quien se quiere loguear\n1.Huesped\n2.Empleado"))
+                    select = int(input("\nQuien se quiere loguear\n1.Huesped\n2.Empleado"))
                     match select:
                         case 1:  # LOGIN - GUEST
                             datos = self.guest_input.login(self.db)
-                            if not datos:
-                                print("Huesped no encontrado")
-                            else:
+                            if datos:
+
                                 id_guest = datos[0][0]
                                 option_login = 0
                                 while option_login != 4:
                                     option_login = int(input(
-                                        "\n1. Hacer una reservacion\n2. Editar perfil\n3. Borrar perfil\n4. Cerrar sesion"))
+                                        "1. Hacer una reservacion\n2. Editar perfil\n3. Borrar perfil\n4. Cerrar sesion"))
 
                                     match option_login:
                                         case 1:
@@ -61,12 +96,14 @@ class Menu_App:
                                                 self.db)
                                             optional_service = self.optional_service_input.all_optional_service(self.db)
                                             all_bedrooms = self.bedroom_input.all_bedrooms(self.db)
-                                            for i, bedroom in enumerate(all_bedrooms):
-                                                print(
-                                                    f"{i + 1}. Tipo de habitacion: {bedroom[1]} - precio: {bedroom[2]} - capacidad para {bedroom[3]} personas")
-                                            option_bedroom = int(input("Seleccione alguna habitacion"))
-                                            id_bedroom = all_bedrooms[(option_bedroom - 1)][0]
-                                            bedroom_price = all_bedrooms[(option_bedroom - 1)][2]
+                                            #for i, bedroom in enumerate(all_bedrooms):
+                                            #    print(
+                                            #        f"{i + 1}. Tipo de habitacion: {bedroom[1]} - precio: {bedroom[2]} - capacidad para {bedroom[3]} personas")
+                                            #option_bedroom = int(input("Seleccione alguna habitacion"))
+                                            option_bedroom = self.select_bedroom(all_bedrooms)
+                                            print(option_bedroom)
+                                            id_bedroom = all_bedrooms[0]
+                                            bedroom_price = all_bedrooms[2]
                                             mandatory_service_total = self.mandatory_service_input.get_total_price_mandatory_service(
                                                 self.db)
                                             self.booking_input.create_booking(id_guest, id_bedroom, self.db)
@@ -102,6 +139,8 @@ class Menu_App:
                                         case 3:  # DISABLE GUEST
                                             self.guest_input.disable(id_guest, self.db)
                                             option_login = 4
+                                        case 4:
+                                            print("")
                                         case _:  # INCORRECT OPTION
                                             print("Opcion invalida")
                         case 2:
