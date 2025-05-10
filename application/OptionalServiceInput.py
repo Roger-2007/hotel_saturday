@@ -1,12 +1,12 @@
 from domain.models.OptionalService import OptionalService
-from repository.persistence.OptionalServiceRepository import OptionalServiceRepository
+from domain.service.OptionalSveService import OptionalSveService
 import re
 
 class OptionalServiceInput:
 
     def __init__(self):
         self.optional_service = OptionalService(None,None,None,None)
-        self.optional_service_repository = OptionalServiceRepository()
+        self.optional_sve_service = OptionalSveService()
 
     def create_optional_service(self,db):
 
@@ -49,10 +49,10 @@ class OptionalServiceInput:
                 print("El precio solo puede ser numeros")
             except Exception as e:
                 print(f"Ocurrió un error al digitar el precio: {e}")
-        self.optional_service_repository.create_optional_service_repository(self.optional_service,db)
+        self.optional_sve_service.create_optional_sve_service(self.optional_service,db)
 
     def all_optional_service(self,db):
-        return self.optional_service_repository.all_optional_service_repository(db)
+        return self.optional_sve_service.all_optional_sve_service(db)
 
     def update_optional_service(self,id,db):
         self.optional_service.id=id
@@ -95,8 +95,8 @@ class OptionalServiceInput:
                 print("El precio solo puede ser numeros")
             except Exception as e:
                 print(f"Ocurrió un error al digitar el precio: {e}")
-        self.optional_service_repository.update_optional_service_repository(self.optional_service,db)
+        self.optional_sve_service.update_optional_sve_service(self.optional_service,db)
 
     def delete_optional_service(self,id,db):
         self.optional_service.id=id
-        self.optional_service_repository.delete_optional_service_repository(self.optional_service,db)
+        self.optional_sve_service.delete_optional_sve_service(self.optional_service,db)
