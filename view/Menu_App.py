@@ -84,7 +84,10 @@ class Menu_App:
             match option:
                 case 1:  # LOGIN
                     select = 0
-                    select = int(input("\nQuien se quiere loguear\n1.Huesped\n2.Empleado"))
+                    try:
+                        select = int(input("\nQuien se quiere loguear\n1.Huesped\n2.Empleado"))
+                    except ValueError:
+                        print("Debes ingresar un numero")
                     match select:
                         case 1:  # LOGIN - GUEST
                             datos = self.guest_input.login(self.db)
@@ -143,6 +146,10 @@ class Menu_App:
                                                 0] + bedroom_price) * days[0][0]
 
                                             self.booking_input.update_total_booking(id_booking[0][0], total, self.db)
+
+                                            print(f"\nLa reservacion se hizo con exito, a continuacion los detalles de la reservacion:\nNumero de la habitacion: {bedroom_chose[0]}, tipo de habitacion: {bedroom_chose[1]}, numero de dias: {days[0][0]}, total: {total}\n")
+
+
                                             option_login = 4
                                         case 2:  # UPDATE - GUEST
                                             self.guest_input.update(id_guest, self.db)
@@ -159,12 +166,15 @@ class Menu_App:
                             if not datos:
                                 print("Empleado no encontrado")
                             else:
-                                print("Sesion iniciada con exito!")
+
                                 id = datos[0][0]
                                 option_employee = 0
                                 while option_employee != 4:
-                                    option_employee = int(input(
+                                    try:
+                                        option_employee = int(input(
                                         "1. Habitacion\n2. Crear servicio obligatorio\n3. Crear servicio opcional\n4. Salir"))
+                                    except ValueError:
+                                        print("Debes ingresar un numero")
                                     match option_employee:
                                         case 1:
                                             option_bedroom = int(
@@ -184,15 +194,21 @@ class Menu_App:
                                             self.optional_service_input.create_optional_service(self.db)
                                         case _:
                                             print("Opcion invalida")
-
+                        case _:
+                            print("Opcion invalida")
                 case 2:  # REGISTER
-
-                    option_register = int(input("Quien se desea registrar?\n1. Huesped\n2. Empleado"))
+                    option_register = 0
+                    try:
+                        option_register = int(input("\nQuien se desea registrar?\n1. Huesped\n2. Empleado\n"))
+                    except ValueError:
+                        print("Debes ingresar un numero")
                     match option_register:
                         case 1:
                             self.guest_input.register(self.db)
                         case 2:
                             self.employee_input.create_employee(self.db)
+                        case _:
+                            print("Opcion invalida")
 
                 case 3:  # FINISH
                     print("Finalizaste con exito")
