@@ -21,7 +21,10 @@ class BookingService:
     def get_days_service(self, booking, db):
         try:
             resultado = self.booking_repository.get_days_repository(booking,db)
-            return resultado
+            if resultado:
+                return resultado
+            else:
+                return 1
         except Exception as e:
             print(f"Ocurrió un error al traer los dias: {e}")
 
