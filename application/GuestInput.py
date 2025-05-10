@@ -1,4 +1,3 @@
-from csv import excel
 
 from domain.models.Guest import  Guest
 #from repository.persistence.GuestRepository import GuestRepository
@@ -13,7 +12,7 @@ class GuestInput:
         self.guest_service = GuestService()
 
 
-    def register(self, guest , db):
+    def register(self, db):
 
         while True:
              try:
@@ -25,8 +24,10 @@ class GuestInput:
                     break
                 else:
                     print("\nEl ID debe tener entre 7 y 12 numeros\n")
-             except Exception:
+             except ValueError:
                  print("\nEl ID solo puede ser numeros\n")
+             except Exception as e:
+                 print(f"\nOcurrió un error al ingresar el id: {e}")
         while True:
             try:
                 name = input("Ingrese su nombre")
@@ -60,8 +61,10 @@ class GuestInput:
                     break
                 else:
                     print("\nEl numero de telefono debe tener entre 7 y 10 digitos\n")
-             except Exception:
+             except ValueError:
                  print("\nEl numero de telefono solo puede ser numeros\n")
+             except Exception as e:
+                 print(f"\nOcurrió un error al ingresar el numero de telefono: {e}")
 
 
         while True:
@@ -179,8 +182,10 @@ class GuestInput:
                     break
                 else:
                     print("\nEl numero de telefono debe tener entre 7 y 10 digitos\n")
-            except Exception:
+            except ValueError:
                 print("\nEl numero de telefono solo puede ser numeros\n")
+            except Exception as e:
+                print(f"\nOcurrió un error al ingresar el numero de telefono: {e}")
 
         while True:
             try:

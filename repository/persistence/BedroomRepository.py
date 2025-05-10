@@ -9,7 +9,12 @@ class BedroomRepository:
         query = "INSERT INTO bedroom (type,price,capacity,description) VALUES (%s,%s,%s,%s)"
         values = (bedroom.type, bedroom.price, bedroom.capacity, bedroom.description)
         db.execute_query(query , values)
-        print("Habitacion creada con exito")
+
+
+    def update_bedroom_repository(self,bedroom,db):
+        query = "Update bedroom set type=%s,price=%s,capacity=%s,description=%s where id_bedroom=%s"
+        values = (bedroom.type,bedroom.price,bedroom.capacity,bedroom.description,bedroom.id_bedroom)
+        db.execute_query(query,values)
 
     def all_bedrooms_repository(self,db):
         query ="SELECT * FROM bedroom where status=1"
