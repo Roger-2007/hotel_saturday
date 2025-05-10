@@ -16,7 +16,7 @@ class BookingRepository:
         return result
 
     def get_days_repository(self,booking,db):
-        query = "SELECT datediff(end_date,start_date) from booking where id_booking = %s"
+        query = "SELECT datediff(end_date,start_date)+1 from booking where id_booking = %s"
         values = (booking.id_booking,)
         result = db.execute_query(query,values)
         return result
