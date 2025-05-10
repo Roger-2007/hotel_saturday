@@ -42,7 +42,7 @@ class Menu_App:
                 except ValueError:
                     print("\nSolo se permiten numeros\n")
 
-    def select_optional_services(self, optional_services, id_booking):
+    def add_optional_services(self, optional_services, id_booking):
         while True:
             print("\nServicios opcionales disponibles:")
             for i, opt in enumerate(optional_services):
@@ -53,8 +53,7 @@ class Menu_App:
                     break
                 elif 1 <= option <= len(optional_services):
                     id_optional_service = optional_services[option - 1][0]
-                    self.booking_optional_service_input.create_reservacion_servicio_opcional(
-                        id_booking, id_optional_service, self.db)
+                    self.booking_optional_service_input.create_reservacion_servicio_opcional(id_booking, id_optional_service, self.db)
                 else:
                     print("Opción inválida.")
             except ValueError:
@@ -98,26 +97,28 @@ class Menu_App:
                                             all_bedrooms = self.bedroom_input.all_bedrooms(self.db)
                                             if not all_bedrooms:
                                                 break
-                                            option_bedroom = self.select_bedroom(all_bedrooms)
-                                            id_bedroom = all_bedrooms[0]
-                                            bedroom_price = all_bedrooms[2]
+                                            bedroom_chose = self.select_bedroom(all_bedrooms)
+                                            print(bedroom_chose)
+                                            id_bedroom = bedroom_chose[0]
+                                            bedroom_price = bedroom_chose[2]
                                             mandatory_service_total = self.mandatory_service_input.get_total_price_mandatory_service(self.db)
                                             self.booking_input.create_booking(id_guest, id_bedroom, self.db)
                                             id_booking = self.booking_input.get_id_booking(id_guest, id_bedroom,self.db)
 
-                                            option_optional = 1
-                                            while option_optional != 0:
+                                            #Llama al metodo para agregar los servicios opcionales
+                                            self.add_optional_services(optional_service,id_booking)
+                                            #option_optional = 1
+                                            #while option_optional != 0:
 
-                                                for i, optservice in enumerate(optional_service):
-                                                    print(
-                                                        f"{i + 1}. {optservice[1]} , {optservice[2]} - valor: {optservice[3]}")
-                                                option_optional = int(
-                                                    input(
-                                                        "Selecciona algun servicio opcional o pulsa '0' para omitir\n"))
-                                                if option_optional != 0:
-                                                    id_optional_service = optional_service[(option_optional - 1)][0]
-                                                    self.booking_optional_service_input.create_reservacion_servicio_opcional(
-                                                        id_booking[0][0], id_optional_service, self.db)
+                                                #for i, optservice in enumerate(optional_service):
+                                                    #print(
+                                                       # f"{i + 1}. {optservice[1]} , {optservice[2]} - valor: {optservice[3]}")
+                                                #option_optional = int(
+                                                    #input(
+                                                        #"Selecciona algun servicio opcional o pulsa '0' para omitir\n"))
+                                                #if option_optional != 0:
+                                                    #id_optional_service = optional_service[(option_optional - 1)][0]
+                                                    #self.booking_optional_service_input.create_reservacion_servicio_opcional(id_booking[0][0], id_optional_service, self.db)
                                             optional_service_total = self.booking_input.get_total_price_optional_service(
                                                 id_booking[0][0], self.db)
                                             days = self.booking_input.get_days(id_booking[0][0], self.db)
