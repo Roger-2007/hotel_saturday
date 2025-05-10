@@ -53,7 +53,7 @@ class BedroomInput:
         while True:
             try:
                 description = input("Ingrese la descripcion de la habitacion")
-                es_valido = re.fullmatch(r"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]",description)
+                es_valido = re.fullmatch(r"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$",description)
                 if es_valido:
                     self.bedroom.description = description
                     break

@@ -23,7 +23,7 @@ class MandatoryServiceInput:
         while True:
             try:
                 description = input("Ingrese al descripcion del servicio obligatorio")
-                es_valido = re.fullmatch(r"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]",description)
+                es_valido = re.fullmatch(r"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$",description)
                 if es_valido:
                     self.mandatory_service.description=description
                     break
@@ -70,7 +70,7 @@ class MandatoryServiceInput:
         while True:
             try:
                 description = input("Ingrese al descripcion del servicio obligatorio")
-                es_valido = re.fullmatch(r"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]", description)
+                es_valido = re.fullmatch(r"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$", description)
                 if es_valido:
                     self.mandatory_service.description = description
                     break
